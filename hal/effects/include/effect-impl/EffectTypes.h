@@ -172,6 +172,11 @@ constexpr size_t getChannelCount(
             return __builtin_popcount(layout.get<Tag::layoutMask>() & mask);
         case Tag::voiceMask:
             return __builtin_popcount(layout.get<Tag::voiceMask>() & mask);
+        // PenguinOS: acnMask (Ambisonic Channel Number) was added to
+        // AudioChannelLayout in android.media.audio.common.types-V5 (A17);
+        // count set channels like the other mask tags to satisfy -Wswitch.
+        case Tag::acnMask:
+            return __builtin_popcount(layout.get<Tag::acnMask>() & mask);
     }
     return 0;
 }

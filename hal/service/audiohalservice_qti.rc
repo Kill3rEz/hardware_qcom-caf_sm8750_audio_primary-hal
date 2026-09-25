@@ -1,4 +1,9 @@
 service vendor.audio-hal-aidl /vendor/bin/hw/audiohalservice.qti
+    # PenguinOS: A17 servicemanager asks init to start these via ctl.interface_start;
+    # without the declarations init answers "Could not find 'aidl/...'" every second.
+    interface aidl android.hardware.audio.core.IModule/default
+    interface aidl android.hardware.audio.core.IConfig/default
+    interface aidl vendor.qti.hardware.pal.IPAL/default
     class hal
     user audioserver
     group audio media mediadrm drmrpc inet net_bt net_bt_admin net_bw_acct wakelock context_hub oem_2901 oem_2912
